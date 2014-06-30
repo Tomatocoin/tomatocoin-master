@@ -1332,7 +1332,7 @@ int64 static GetBlockValue(int nBits, int nHeight, int64 nFees)
             if((nHeight >= 17000 && dDiff > 75) || nHeight >= 24000) { // GPU/ASIC difficulty calc
                 // 2222222/(((x+2600)/9)^2)
                 nSubsidy = (2222222.0 / (pow((dDiff+2600.0)/9.0,2.0)));
-                if (nSubsidy > 25) nSubsidy = 25;
+                if (nSubsidy > 250) nSubsidy = 250;
                 if (nSubsidy < 5) nSubsidy = 5;
             } else { // CPU mining calc
                 nSubsidy = (11111.0 / (pow((dDiff+51.0)/6.0,2.0)));
@@ -1353,8 +1353,20 @@ int64 static GetBlockValue(int nBits, int nHeight, int64 nFees)
     // printf("height %u diff %4.2f reward %i \n", nHeight, dDiff, nSubsidy);
     nSubsidy *= COIN;
 
-    // yearly decline of production by 7% per year, projected 21.3M coins max by year 2050.
-    for(int i = 210240; i <= nHeight; i += 210240) nSubsidy *= 0.93;
+    //improve
+    if(nHeight>13000){
+       nSubsidy*=4.5;
+    }
+
+    // yearly decline of production by 4% per odd year or 2% per even year, projected 87.5B coins max by year 2026.
+     for(int i = 262800; i <= nHeight; i += 262800)
+     {
+         if(i%262800==0){
+               nSubsidy *= 0.98;
+         }else{
+              nSubsidy *= 0.96;
+         }
+     }
 
     return nSubsidy + nFees;
 }
