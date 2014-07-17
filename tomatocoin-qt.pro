@@ -246,8 +246,7 @@ HEADERS += src/qt/bitcoingui.h \
     src/sph_echo.h \
     src/sph_shavite.h \
     src/sph_simd.h\
-    src/bcrypt.h \
-    src/ocean.h
+    src/sph_hamsi.h
 
 
 SOURCES += src/qt/bitcoin.cpp \
@@ -331,8 +330,8 @@ SOURCES += src/qt/bitcoin.cpp \
     src/shavite.c \
     src/echo.c \
     src/simd.c \
-    src/bcrypt.cpp \
-    src/ocean.cpp
+    src/hamsi.c\
+    src/hamsi_helper.c
 
 RESOURCES += src/qt/bitcoin.qrc
 
