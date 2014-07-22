@@ -1326,7 +1326,7 @@ int64 static GetBlockValue(int nBits, int nHeight, int64 nFees)
     if(nHeight > 4500 || fTestNet) dDiff = ConvertBitsToDouble(nBits);
 
     int64 nSubsidy = 0; 
-
+    int64 targetCoinYear = 12;
 
         if(nHeight >= 5465) {
             if((nHeight >= 17000 && dDiff > 75) || nHeight >= 24000) { // GPU/ASIC difficulty calc
@@ -1365,6 +1365,10 @@ int64 static GetBlockValue(int nBits, int nHeight, int64 nFees)
                nSubsidy *= 0.98;
          }else{
               nSubsidy *= 0.96;
+         }
+         //end nearly 12 years
+         if(i/262800>targetCoinYear){
+                nSubsidy=*0.1;
          }
      }
 
